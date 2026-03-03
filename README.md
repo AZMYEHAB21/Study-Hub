@@ -27,7 +27,7 @@ Study Hub هو موقع شامل لإدارة الدراسة وتنظيم الو
 🔗 رابط الموقع
 
 🌐 زيارة Study Hub الآن
- ([ضع رابط موقعك هنا](https://azmyehab21.github.io/Study-Hub/))
+ (https://azmyehab21.github.io/Study-Hub/))
 
 🛠️ التقنيات المستخدمة
 
