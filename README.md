@@ -56,11 +56,11 @@ Study Hub هو موقع شامل لإدارة الدراسة وتنظيم الو
 
 📧 البريد الإلكتروني: azmyehab610@gmail.com
 
-WhatsApp: اضغط هنا
+WhatsApp: https://wa.me/201220373091
 
-Facebook: اضغط هنا
+Facebook: https://www.facebook.com/profile.php?id=100083276749464&mibextid=ZbWKwL
 
-Instagram: اضغط هنا
+Instagram: https://instagram.com/azmy_ehab_?igshid=MzRlODBiNWFlZA==
 
 👤 صاحب المشروع
 
