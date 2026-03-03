@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Hub - نظام إدارة الدراسة</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hamburger Menu -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>📚 Study Hub</h1>
+            </div>
+            <nav class="nav" id="nav">
+                <a href="#home" class="nav-link" data-section="home">الرئيسية</a>
+                <a href="#tasks" class="nav-link" data-section="tasks">مهامي</a>
+                <a href="#schedule" class="nav-link" data-section="schedule">الجداول</a>
+                <a href="#notes" class="nav-link" data-section="notes">الملاحظات</a>
+                <a href="#files" class="nav-link" data-section="files">الملفات</a>
+                <a href="#timer" class="nav-link" data-section="timer">المؤقت</a>
+                <a href="#exams" class="nav-link" data-section="exams">الاختبارات</a>
+                <a href="#contact" class="nav-link" data-section="contact">تواصل</a>
+            </nav>
+            <div class="header-controls">
+                <button class="dark-mode-btn" id="darkModeBtn">🌙</button>
+                <button class="share-btn" id="shareBtn">🔗 مشاركة</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Home Section -->
+        <section id="home" class="section section-active">
+            <div class="container">
+                <div class="hero">
+                    <h2>أهلاً وسهلاً بك! 👋</h2>
+                    <p>منصتك الشاملة لإدارة دراستك وتنظيم وقتك</p>
+                    <blockquote>"خيركم من تعلم العلم وعلمه" - الحديث الشريف</blockquote>
+                    <button class="btn btn-primary" onclick="switchSection('tasks')">ابدأ الآن</button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-card">
+                        <h3 id="totalTasks">0</h3>
+                        <p>إجمالي المهام</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="completedTasks">0</h3>
+                        <p>المهام المكتملة</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="progressPercent">0%</h3>
+                        <p>نسبة الإنجاز</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="userPoints">0</h3>
+                        <p>النقاط</p>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <p>تقدمك اليومي:</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="daily-quote">
+                    <h3>💡 الاقتباس اليومي:</h3>
+                    <p id="dailyQuote"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tasks Section -->
+        <section id="tasks" class="section">
+            <div class="container">
+                <h2>إدارة المهام 📝</h2>
+                
+                <div class="add-task-form">
+                    <input type="text" id="taskInput" placeholder="أضف مهمة جديدة...">
+                    <input type="date" id="taskDate">
+                    <input type="time" id="taskTime">
+                    <select id="taskPriority">
+                        <option value="low">منخفضة</option>
+                        <option value="medium">متوسطة</option>
+                        <option value="high">عالية</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="addTask()">إضافة</button>
+                </div>
+
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterTasks('all')">الكل</button>
+                    <button class="filter-btn" onclick="filterTasks('pending')">قيد الانتظار</button>
+                    <button class="filter-btn" onclick="filterTasks('completed')">مكتملة</button>
+                    <button class="filter-btn" onclick="filterTasks('high')">أولوية عالية</button>
+                </div>
+
+                <div class="tasks-list" id="tasksList"></div>
+            </div>
+        </section>
+
+        <!-- Schedule Section -->
+        <section id="schedule" class="section">
+            <div class="container">
+                <h2>الجداول الدراسية 📅</h2>
+                
+                <div class="add-schedule-form">
+                    <input type="text" id="scheduleSubject" placeholder="المادة">
+                    <select id="scheduleDay">
+                        <option>الأحد</option>
+                        <option>الإثنين</option>
+                        <option>الثلاثاء</option>
+                        <option>الأربعاء</option>
+                        <option>الخميس</option>
+                        <option>الجمعة</option>
+                        <option>السبت</option>
+                    </select>
+                    <input type="time" id="scheduleTime">
+                    <button class="btn btn-primary" onclick="addSchedule()">إضافة</button>
+                </div>
+
+                <div class="schedule-grid" id="scheduleGrid"></div>
+            </div>
+        </section>
+
+        <!-- Notes Section -->
+        <section id="notes" class="section">
+            <div class="container">
+                <h2>الملاحظات 📌</h2>
+                
+                <div class="add-note-form">
+                    <input type="text" id="noteTitle" placeholder="عنوان الملاحظة">
+                    <textarea id="noteContent" placeholder="محتوى الملاحظة..."></textarea>
+                    <select id="noteColor">
+                        <option value="yellow">أصفر</option>
+                        <option value="blue">أزرق</option>
+                        <option value="green">أخضر</option>
+                        <option value="pink">وردي</option>
+                        <option value="purple">بنفسجي</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="addNote()">حفظ الملاحظة</button>
+                </div>
+
+                <div class="notes-grid" id="notesGrid"></div>
+            </div>
+        </section>
+
+        <!-- Files Section -->
+        <section id="files" class="section">
+            <div class="container">
+                <h2>الملفات 📂</h2>
+                
+                <div class="file-upload-area" id="fileUploadArea">
+                    <p>اسحب الملفات هنا أو اضغط للاختيار</p>
+                    <input type="file" id="fileInput" multiple style="display: none;">
+                </div>
+
+                <div class="files-list" id="filesList"></div>
+            </div>
+        </section>
+
+        <!-- Exams Section -->
+        <section id="exams" class="section">
+            <div class="container">
+                <h2>جدول الاختبارات 📋</h2>
+                
+                <div class="add-exam-form">
+                    <input type="text" id="examSubject" placeholder="اسم المادة">
+                    <input type="date" id="examDate">
+                    <input type="time" id="examTime">
+                    <textarea id="examNotes" placeholder="ملاحظات عن الاختبار..." style="resize: vertical; min-height: 80px;"></textarea>
+                    <button class="btn btn-primary" onclick="addExam()">إضافة اختبار</button>
+                </div>
+
+                <div class="exams-list" id="examsList"></div>
+            </div>
+        </section>
+
+        <!-- Timer Section -->
+        <section id="timer" class="section">
+            <div class="container">
+                <h2>مؤقت Pomodoro ⏱️</h2>
+                
+                <div class="timer-container">
+                    <div class="timer-display" id="timerDisplay">25:00</div>
+                    <div class="timer-type" id="timerType">وقت العمل</div>
+                    
+                    <div class="timer-controls">
+                        <button class="btn btn-primary" onclick="startTimer()">ابدأ</button>
+                        <button class="btn btn-secondary" onclick="pauseTimer()">إيقاف</button>
+                        <button class="btn btn-secondary" onclick="resetTimer()">إعادة تعيين</button>
+                    </div>
+
+                    <div class="timer-settings">
+                        <label>وقت العمل (دقائق):</label>
+                        <input type="number" id="workTime" value="25" min="1" max="60">
+                        
+                        <label>وقت الراحة (دقائق):</label>
+                        <input type="number" id="breakTime" value="5" min="1" max="30">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2>تواصل معي 📧</h2>
+                <form id="contact-form" class="contact-form">
+    <input type="text" name="user_name" placeholder="اسمك" required>
+    <input type="email" name="user_email" placeholder="بريدك الإلكتروني" required>
+    <textarea name="message" placeholder="رسالتك..." required></textarea>
+    <button type="submit" class="btn btn-primary">إرسال</button>
+</form>
+                
+
+                <div class="social-links">
+                    <a href="https://wa.me/201220373091" target="_blank" class="social-whatsapp">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.272-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-5.031 1.378c-1.536.946-2.823 2.433-3.646 4.29-.822 1.858-1.01 3.957-.537 5.857.528 2.27 1.693 4.322 3.308 5.712.779.675 1.69 1.159 2.69 1.454 1-.295 1.911-.779 2.69-1.454 1.615-1.39 2.78-3.442 3.308-5.712.473-1.9.285-3.999-.537-5.857-.823-1.857-2.11-3.344-3.646-4.29a9.87 9.87 0 00-5.031-1.378"/>
+                        </svg>
+                        WhatsApp
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100083276749464&mibextid=ZbWKwL" target="_blank" class="social-facebook">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                        Facebook
+                    </a>
+                    <a href="https://instagram.com/azmy_ehab_?igshid=MzRlODBiNWFlZA==" target="_blank" class="social-instagram">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.521 17.953c-.238 1.196-1.395 2.126-2.756 2.347-1.175.164-4.569.164-5.765 0-1.361-.221-2.518-1.151-2.756-2.347-.165-1.176-.165-4.568 0-5.744.238-1.195 1.395-2.126 2.756-2.347 1.176-.164 4.57-.164 5.765 0 1.361.221 2.518 1.152 2.756 2.347.165 1.176.165 4.568 0 5.744zm-10.221-13.418c1.326 0 2.405-1.079 2.405-2.405s-1.079-2.405-2.405-2.405-2.405 1.079-2.405 2.405 1.079 2.405 2.405 2.405zm7.921 0c1.326 0 2.405-1.079 2.405-2.405s-1.079-2.405-2.405-2.405-2.405 1.079-2.405 2.405 1.079 2.405 2.405 2.405z"/>
+                        </svg>
+                        Instagram
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Developed with Azmy Ehab ❤️</p>
+            <p>© 2026 Study Hub - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <!-- Reminders Modal -->
+    <div class="modal" id="reminderModal">
+        <div class="modal-content reminder-modal">
+            <button class="close-btn" onclick="closeReminder()">&times;</button>
+            <div class="reminder-content">
+                <h2 id="reminderTitle">🕌 تذكير ديني</h2>
+                <p id="reminderText"></p>
+                <audio id="reminderAudio" src="" preload="auto"></audio>
+                <button class="btn btn-primary" onclick="playSound()">تشغيل الصوت</button>
+                <button class="btn btn-secondary" onclick="closeReminder()">تمام</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
